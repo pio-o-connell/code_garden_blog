@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-4 text-center">
+      {% if about and about.image %}
+        <img src="{{ about.image.url }}" width="75%" alt="About image" />
+      {% else %}
+        <img src="{% static 'images/nobody.jpg' %}" width="75%" alt="Default about image" />
+      {% endif %}
+    </div>
+    <div class="col-8">
+      <!-- Title goes between these h2 tags -->
+      <h2>{{ about.title }}</h2>
+      <!-- Content goes directly underneath this -->
+      {{ about.content | safe }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-right">
+      <!-- Updated on field goes in here -->
+
+      <p class="text-end"><em>Updated on: {{ about.updated_on }}</em></p>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+Your about/urls.py file should look like this:
+
+from . import views
+from django.urls import path
+
+urlpatterns = [
+    path('', views.about_me, name='about'),
+]
