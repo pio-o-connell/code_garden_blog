@@ -27,6 +27,7 @@ urlpatterns = [
     path("", include("blog.urls"), name="blog-urls"),
 ]
 
-# Serve media files during development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files (include during development and local testing).
+# Note: Serving media via Django is fine for local/testing but not recommended for
+# production public deployments — use cloud storage or a webserver in production.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
